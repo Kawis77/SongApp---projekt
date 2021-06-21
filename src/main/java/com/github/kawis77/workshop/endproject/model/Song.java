@@ -26,6 +26,11 @@ public class Song {
     private String songText;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    private Chords chords = new Chords();
 
 }
