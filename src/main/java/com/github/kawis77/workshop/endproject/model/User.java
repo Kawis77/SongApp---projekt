@@ -4,6 +4,7 @@ package com.github.kawis77.workshop.endproject.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,9 @@ public class User {
     @Column(nullable = false)
     @NotEmpty
     private String userName;
+    @Column
+    @Email
+    private String email;
     @Column(nullable = false)
     @NotEmpty
     private String password;
