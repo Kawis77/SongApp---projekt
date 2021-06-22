@@ -1,44 +1,32 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: krzys
-  Date: 23.05.2021
-  Time: 12:27
-  To change this template use File | Settings | File Templates.
-
---%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Created song</title>
+    <title>Utwórz personę</title>
 </head>
 <body>
-<form method="post" action="">
+<form:form method="post" action="" modelAttribute="song">
     <div>
-        <label>songName
-            <input type="text" name="songName"/>
+        <label>Login:
+            <form:input type="text" path="songName"/>
+        </label>
+    </div>
+
+    <div>
+        <label>Email:
+            <form:input type="text" path="songAuthor"/>
         </label>
     </div>
     <div>
-        <label>songAuthor
-
-            <input type="text" name="songAurhor">
+        <label>Password:
+            <form:input type="text" path="songText"/>
         </label>
-        <div/>
-        <div>
-            <label>songText
-                <input type="text" name="songText">
-            </label>
-        </div>
-        <div>
-            <label>
-                <button type = "submit">Dodaj</button>
-            </label>
-
-        </div>
-
-
     </div>
-</form>
-
+    <div>
+        <button type="submit">Dodaj</button>
+    </div>
+</form:form>
 </body>
 </html>

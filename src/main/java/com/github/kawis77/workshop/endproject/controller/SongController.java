@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/song/")
+@RequestMapping("/song")
 public class SongController {
 
     private final SongRepository songRepository;
@@ -25,21 +25,18 @@ public class SongController {
     }
 
 
-    @GetMapping("/add") // Metoda jest wywoływana w reakcji na żądanie GET /create-person
-    public String prepare() {
+    @GetMapping() // Metoda jest wywoływana w reakcji na żądanie GET /create-person
+    public String addSong(Model model) {
+        // Aby zbindować formularz Spring Form do obietku z modelu musimy w tym modelu
+        // coś umieścić -> clever!
+        model.addAttribute("song", new Song());
         return "song/create-form"; // Zwracamy identyfikator widoku, który zostanie odnaleziony na podstawie PREFIX + identyfikator + SUFIX ---> ma to dać poprawną ścieżkę do pliku patrząc z perspektywy katalogu webapp
     }
 
-    @PostMapping("/add")
-    public String process(@RequestParam() String songName, @RequestParam String songAuthor, @RequestParam String songText, Model model) {
-        Song song= new Song();
-        song.setSongName(songName);
-        song.setSongAuthor(songAuthor);
-        song.setSongText(songText);
+    @PostMapping
+    public String addSong(Song song) {
         songRepository.save(song);
-        model.addAttribute("song", song);
         return "song/created";
+
     }
-
-
 }
