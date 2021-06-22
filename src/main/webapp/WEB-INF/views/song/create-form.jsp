@@ -14,18 +14,18 @@
 <body>
 <form method="post" action="">
     <div>
-        <label>Song Name
+        <label>songName
             <input type="text" name="songName"/>
         </label>
     </div>
     <div>
-        <label>Email :
+        <label>songAuthor
 
             <input type="text" name="songAurhor">
         </label>
         <div/>
         <div>
-            <label>
+            <label>songText
                 <input type="text" name="songText">
             </label>
         </div>
