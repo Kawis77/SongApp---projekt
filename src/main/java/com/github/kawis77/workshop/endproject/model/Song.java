@@ -22,7 +22,7 @@ public class Song {
     private String songName;
     @Column(nullable = false)
     private String songAuthor;
-    @Column(nullable = false, length = 1000)
+    @Column(nullable = false)
     private String songText;
 
     @ManyToOne
