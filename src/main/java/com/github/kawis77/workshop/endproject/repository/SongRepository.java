@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface SongRepository extends JpaRepository<Song, Long> {
 
-    Song removeById(Long id);
+Song findBySongName(String name);
+Song removeBySongName(Song name);
 
 }

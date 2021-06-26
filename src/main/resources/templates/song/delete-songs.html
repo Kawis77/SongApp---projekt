@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete song</title>
+</head>
+<body>
+<h1>Delete song</h1>
+<div>
+    <div th:each="songs : ${deletesong}">
+        <div th:selected="${songs}"></div>
+        <input type="submit" th:name="Wyslij"/>
+
+    </div>
+</div>
+</body>
+</html>

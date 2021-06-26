@@ -4,6 +4,8 @@ package com.github.kawis77.workshop.endproject.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "songs")
@@ -30,7 +32,10 @@ public class Song {
     private User user;
 
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
-    private Chords chords = new Chords();
+    @OneToMany()
+    private List<Chords> chords = new ArrayList<>();
 
+    public Song(String songName) {
+        this.songName = songName;
+    }
 }
