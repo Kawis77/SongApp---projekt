@@ -2,23 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add new song</title>
+    <title>Create new User</title>
 </head>
 <body>
-<h1>Add new song</h1>
+<h1>Create new User</h1>
 
-<form method="POST" th:object="${addsong}" th:action="@{/addSong}">
-    <h4>Enter your song</h4>
+<form method="POST" th:action="@{/addsong}" th:object="${addsong}">
+    <h4>Create new User</h4>
 
-    <label for="name">CreateSong</label>
 
+    <a>Song name</a>
     <input type="text" th:field="*{songName}"/>
+    <a>Song Aurhor</a>
     <input type="text" th:field="*{songAuthor}"/>
+    <a>Song text</a>
     <input type="text" th:field="*{songText}"/>
-    <input type="number" th:field="*{chords}"/>
-    <input type="submit" th:name="Wyslij"/>
+    <a>Song chords</a>
+    <input type="text" th:field="*{chords}"/>
 
-    <button>Submit</button>
+    <button type="submit" th:name="Wyslij"/>
+
 
 </form>
 

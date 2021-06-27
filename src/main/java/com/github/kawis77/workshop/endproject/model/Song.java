@@ -31,6 +31,7 @@ public class Song {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(nullable = false)
 
     @OneToMany()
     private List<Chords> chords = new ArrayList<>();

@@ -20,14 +20,12 @@ public class Chords {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
-
+    @Column(unique = false)
     private String name;
 
 
-@ManyToOne(optional = false)
-@JoinColumn(name = "songs_id")
-@NotNull
+@ManyToOne()
+//@JoinColumn(name = "songs_id")
 private Song songs;
 
 }

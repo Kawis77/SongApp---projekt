@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/song")
 public class SongController {
 
     private final SongRepository songRepository;
@@ -30,17 +29,16 @@ public class SongController {
     }
 
 
-    @GetMapping("/addsong")
+    @GetMapping("/newsong")
     public String addSong(Model model) {
-
-        model.addAttribute("addsong", new Song());
+        model.addAttribute("addsong" , new Song());
         return "song/create-songs";
     }
 
     @PostMapping("/addsong")
     public String addSong(Song song) {
         songRepository.save(song);
-        return "song/created";
+        return "song/songs";
 
     }
     @GetMapping("/delete")
