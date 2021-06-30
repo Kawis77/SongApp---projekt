@@ -1,17 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Delete song</title>
+    <title>Create new User</title>
 </head>
 <body>
-<h1>Delete song</h1>
-<div>
-    <div th:each="songs : ${deletesong}">
-        <div th:selected="${songs}"></div>
-        <input type="submit" th:name="Wyslij"/>
+<table class="table table-responsive">
 
-    </div>
-</div>
+    <th >
+    <td>ID</td>
+    <td>Name</td>
+    <td>Address</td>
+    <td>Delete</td>
+    </th>
+
+    <tr th:each="songs : ${deletesong}">
+        <td th:text="${songs.id}"/>
+        <td th:text="${student.name}"/>
+        <td th:text="${student.address}"/>
+        <td >
+            <form th:action="@{delete}" method="post">
+                <input type="hidden" name="id" th:value="${student.id}" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </form>
+        </td>
+    </tr>
+</table>
+</form>
+
 </body>
 </html>

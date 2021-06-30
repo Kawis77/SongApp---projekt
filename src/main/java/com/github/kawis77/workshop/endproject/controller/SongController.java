@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.management.DescriptorKey;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+@RequestMapping("/song")
 @Controller
 public class SongController {
 
@@ -42,15 +44,15 @@ public class SongController {
 
     }
     @GetMapping("/delete")
-    public String prepareDelete(String name, Model model) {
-        model.addAttribute("deletesong", songRepository.findAll());
+    public String prepareDelete(Long id ,Model model) {
+        model.addAttribute("deletesong", songRepository.findById(id));
         return "song/delete-songs";
     }
 
     @PostMapping("/delete")
-    public String processDelete(String name) {
-        Song song = songRepository.findBySongName(name);
-        songRepository.removeBySongName(song);
+    public String processDelete(Long id) {
+        Song song = songRepository.findAllById(id);
+        songRepository.delete(song);
         return "redirect:/song/songs";
     }
 
