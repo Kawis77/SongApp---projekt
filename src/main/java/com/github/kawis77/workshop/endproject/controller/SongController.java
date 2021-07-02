@@ -28,8 +28,16 @@ public class SongController {
         this.chordsRepository = chordsRepository;
     }
 
+    @GetMapping("/onesong/{id}")
+    public String prepareOneSong(Model model , @PathVariable Long id)  {
+        model.addAttribute("onesongs",songRepository.findAll());
+        model.addAttribute("onesong", songRepository.findById(id));
+        return "song/onesong";
+    }
+
     @GetMapping("/user-menu")
     public String prepareUserMenu(Model model) {
+
         model.addAttribute("usermenu", songRepository.findAll());
 
         return "song/user-menu";
@@ -69,29 +77,29 @@ public class SongController {
 
     }
 
-    @GetMapping("/edit")
-    public String prepareEdit(Long id, Model model) {
-        model.addAttribute("author", songRepository.findById(id));
-        return "song/edit-song";
+    @GetMapping("/edit/{id}")
+    public String prepareEdit( @PathVariable Long id, Model model) {
+        model.addAttribute("editsong", songRepository.findAll());
+        return "song/edit-songs";
     }
 
     @PostMapping("/edit")
     public String processEdit(Song song, BindingResult bindings) {
         if (bindings.hasErrors()) {
-            return "authors/edit-form";
+            return "/user-menu";
         }
         songRepository.save(song);
         return "redirect:/list";
     }
 
-    @GetMapping("/delete")
-    public String prepareDelete(Long id, Model model) {
+    @GetMapping("/delete/{id}")
+    public String prepareDelete( @PathVariable Long id, Model model , Song song1) {
         model.addAttribute("deletesong", songRepository.findById(id));
-        return "song/delete-songs";
+        return "song/user-menu";
     }
 
-    @PostMapping("/delete")
-    public String processDelete(Long id) {
+    @PostMapping("/delete/{id}")
+    public String processDelete(@PathVariable Long id) {
         Song song = songRepository.findAllById(id);
         songRepository.delete(song);
         return "redirect:/song/list";

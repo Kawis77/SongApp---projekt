@@ -18,6 +18,7 @@
         <tr>
             <th>Song Name </th>
             <th>Song Author</th>
+            <th>SongText</th>
             <th>Check it!</th>
 
         </tr>
@@ -26,9 +27,11 @@
         <tr th:each="song : ${songs}">
             <th th:text="${song.songName}"></th>
             <th th:text="${song.songAuthor}"></th>
+            <th th:text="${song.songText}"></th>
+<!--            <th th:text="${song.songChords}"></th>-->
 
 
-            <td><a th:href="@{/}"} class="btn btn-warning">Check it!<a/>
+            <td> <a th:href="@{song/onesong/{id}(id=${song.id})}"} class="btn  btn-primary">Check<a/>
 
 
 
