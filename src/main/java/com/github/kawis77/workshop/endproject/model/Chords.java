@@ -25,7 +25,11 @@ public class Chords {
 
 
 @ManyToOne()
-//@JoinColumn(name = "songs_id")
+@JoinColumn(name = "songs_id")
 private Song songs;
 
+    public Chords(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

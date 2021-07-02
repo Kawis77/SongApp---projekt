@@ -31,12 +31,18 @@ public class Song {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(nullable = false)
 
-    @OneToMany()
+    @Column(name = "chords")
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Chords> chords = new ArrayList<>();
+
+    public Song(List<Chords> chords) {
+        this.chords = chords;
+    }
 
     public Song(String songName) {
         this.songName = songName;
+
+
     }
 }

@@ -22,12 +22,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "username")
+//    @Column(name = "username")
     @NotEmpty
-    private String userName;
-    @Column
-    @Email
-    private String email;
+    private String username;
+//    @Column
+//    @Email
+//    private String email;
     @Column(nullable = false)
     @NotEmpty
     private String password;
@@ -36,4 +36,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Song> songs = new ArrayList<>();
+
+
 }

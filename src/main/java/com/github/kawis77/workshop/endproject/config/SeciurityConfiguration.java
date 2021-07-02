@@ -1,6 +1,7 @@
 package com.github.kawis77.workshop.endproject.config;
 
-import com.github.kawis77.workshop.endproject.service.CustomDetailUserSerivce;
+
+import com.github.kawis77.workshop.endproject.service.CustomDetailUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,10 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SeciurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
-    private CustomDetailUserSerivce customDetailUserSerivce;
+    private CustomDetailUserService customDetailUserService;
 
-    public SeciurityConfiguration(CustomDetailUserSerivce customDetailUserSerivce) {
-        this.customDetailUserSerivce = customDetailUserSerivce;
+    public SeciurityConfiguration(CustomDetailUserService customDetailUserService) {
+        this.customDetailUserService = customDetailUserService;
     }
 
     @Bean
@@ -26,7 +27,8 @@ public class SeciurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userDetailsService())
+//                .userDetailsService(userDetailsService()) bląd :D
+                .userDetailsService(customDetailUserService)
                 .passwordEncoder(passwordEncoder());
     }
 //
@@ -46,6 +48,9 @@ public class SeciurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .defaultSuccessUrl("/")
+                .and()
+                .logout().logoutSuccessUrl("/login")
                 .and()
                 .csrf()
                 .disable();

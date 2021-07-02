@@ -4,29 +4,15 @@
     <meta charset="UTF-8">
     <title>Create new User</title>
 </head>
-<body>
-<table class="table table-responsive">
-
-    <th >
-    <td>ID</td>
-    <td>Name</td>
-    <td>Address</td>
-    <td>Delete</td>
-    </th>
-
-    <tr th:each="songs : ${deletesong}">
-        <td th:text="${songs.id}"/>
-        <td th:text="${student.name}"/>
-        <td th:text="${student.address}"/>
-        <td >
-            <form th:action="@{delete}" method="post">
-                <input type="hidden" name="id" th:value="${student.id}" />
-                <input type="submit" value="Delete" class="btn btn-danger" />
-            </form>
-        </td>
-    </tr>
-</table>
-</form>
-
-</body>
+<tbody>
+<tr th:each="delete : ${deletesong}">
+    <td th:text="${delete}"></td>
+    <td>
+        <form th:action="@{/delete}" method="post" th:object="${deletesong}">
+            <input type="hidden" th:field="${delete}"/>
+            <button type="submit" value="Submit" class="btn btn-danger">Delete</button>
+        </form>
+    </td>
+</tr>
+</tbody>
 </html>

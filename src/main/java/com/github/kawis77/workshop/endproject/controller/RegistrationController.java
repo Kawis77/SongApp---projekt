@@ -26,7 +26,7 @@ public class RegistrationController {
     }
     @PostMapping("/register")
     public String proccesRegistriation(User user){
-        userMenagerService.regiserUser(user);
+        userMenagerService.registerUser(user);
         return "redirect:/login";
     }
 }

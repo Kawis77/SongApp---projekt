@@ -7,8 +7,8 @@
 <body>
 <h1>Create new User</h1>
 
-<form method="POST" th:action="@{/addsong}" th:object="${addsong}">
-    <h4>Create new User</h4>
+<form method="POST" th:action="@{/song/newsong}" th:object="${addsong}">
+    <h4>Create new Song</h4>
 
 
     <a>Song name</a>
@@ -18,9 +18,15 @@
     <a>Song text</a>
     <input type="text" th:field="*{songText}"/>
     <a>Song chords</a>
-    <input type="text" th:field="*{chords}"/>
+    <div th:each="chord : ${chords}">
+        <span th:text="${chord.name}"></span>
+        <input type="checkbox" th:field="*{chords}" th:value="${chord.id}" >
+<!--               th:text="${chord.name}">-->
+    </div>
+<!--    <input type="text" th:field="*{chords}"/>-->
 
-    <button type="submit" th:name="Wyslij"/>
+
+    <button type="submit">Wyslij</button>
 
 
 </form>
