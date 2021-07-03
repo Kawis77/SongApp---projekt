@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create new User</title>
+    <title>Edit song</title>
 </head>
 <body>
-<h1>Create new Song</h1>
+<h1>Edit song</h1>
 
-<form method="POST" th:action="@{/song/newsong}" th:object="${editsong}">
-    <h4>Create new Song</h4>
+<form method="POST" th:action="@{/song/list}" th:object="${editsong}">
+    <h4>Edit song</h4>
+
 
     <a>Song name</a>
     <input type="text" th:field="*{songName}"/>
@@ -16,16 +17,16 @@
     <input type="text" th:field="*{songAuthor}"/>
     <a>Song text</a>
     <input type="text" th:field="*{songText}"/>
-    <a>Song chords</a>
-    <div th:each="chord : ${chords}">
-        <span th:text="${chord.name}"></span>
-        <input type="checkbox" th:field="*{chords}" th:value="${chord.id}" >
-        <!--               th:text="${chord.name}">-->
+<!--    <a>Song chords</a>-->
+<!--    <div th:each="chord : ${chords}">-->
+<!--        <span th:text="${chord.name}"></span>-->
+<!--        <input type="checkbox" th:field="*{chords}" th:value="${chord.id}" >-->
+        <!--                       th:text="${chord.name}">-->
     </div>
-    <!--    <input type="text" th:field="*{chords}"/>-->
+    <!--        <input type="text" th:field="*{chords}"/>-->
 
 
-    <button type="submit">Wyslij</button>
+    <button type="submit">Send</button>
 
 
 </form>

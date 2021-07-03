@@ -36,13 +36,5 @@ public class Song {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Chords> chords = new ArrayList<>();
 
-    public Song(List<Chords> chords) {
-        this.chords = chords;
-    }
 
-    public Song(String songName) {
-        this.songName = songName;
-
-
-    }
 }

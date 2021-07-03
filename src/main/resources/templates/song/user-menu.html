@@ -28,14 +28,13 @@
         <th th:text="${song.songName}"></th>
         <th th:text="${song.songAuthor}"></th>
 
-        <td> <a th:href="@{song/edit/{id}(id=${song.id})}"} class="btn  btn-primary">Update<a/>
-        <td><a th:href="@{song/delete/{id}(id=${song.id})}"} class="btn btn-danger">Delete<a/>
+        <td> <a th:href="@{/song/edit/{id}(id=${song.id})}" } class="btn  btn-primary">Update<a/>
+
+        <td><a th:href="@{/song/delete/{id}(id=${song.id})}" } class="btn btn-danger">Delete<a/>
 
 
 
-
-
-    </tbody>
+   </tbody>
 </table>
 </div>
 </body>

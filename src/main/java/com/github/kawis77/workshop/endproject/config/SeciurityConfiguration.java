@@ -43,7 +43,6 @@ public class SeciurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/song/list").permitAll()
                 .antMatchers("/users/").permitAll()
                 .anyRequest().authenticated()
                 .and()

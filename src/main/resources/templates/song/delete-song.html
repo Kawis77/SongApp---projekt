@@ -1,0 +1,15 @@
+
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Usuwanie autora</title>
+</head>
+<body>
+<form method="POST" th:action="@{/song/list}" th:object="${deletesong}">
+    <p>Czy usunąć autora ${s.fullName} (id = ${author.id})?</p>
+    <p>
+        <input type="hidden" name="id" value="${de.id}"/>
+        <a href="/forms/author/list">Nie</a><button type="submit">Tak</button>
+    </p>
+</form>
+</body>
+</html>
