@@ -94,13 +94,13 @@ public class SongController {
     }
 
     @GetMapping("/delete/{id}")
-    public String prepareDelete(@PathVariable Long id, Model model , Song song1) {
+    public String prepareDelete( @PathVariable Long id, Model model , Song song1) {
         model.addAttribute("deletesong",songDao.findById(id));
-        return "redirect:/song/list";
+        return "/song/delete-song";
     }
 
-    @PostMapping("/delete/")
-    public String processDelete( @PathVariable Long id) {
+    @PostMapping("/delete/{id}")
+    public String processDelete(@PathVariable Long id) {
         Song song = songDao.findById(id);
         songRepository.deleteSongById(song);
         return "redirect:/song/list";

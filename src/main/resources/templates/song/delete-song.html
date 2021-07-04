@@ -1,14 +1,14 @@
 
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Usuwanie autora</title>
 </head>
 <body>
 <form method="POST" th:action="@{/song/list}" th:object="${deletesong}">
-    <p>Czy usunąć autora ${s.fullName} (id = ${author.id})?</p>
+    <p>You wany delete this song ?</p>
     <p>
-        <input type="hidden" name="id" value="${de.id}"/>
-        <a href="/forms/author/list">Nie</a><button type="submit">Tak</button>
+        <input th:type="hidden" th:name="${id}" th:value="${deletesong.id}"/>
+        <a href="/song/list">Nie</a><button type="submit">Tak</button>
     </p>
 </form>
 </body>
