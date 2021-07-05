@@ -32,9 +32,10 @@ public class Song {
     private User user;
 
 
-    @Column(name = "chords")
-    @OneToMany(cascade = CascadeType.ALL)
+//    @Column(name = "chords")
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Chords> chords = new ArrayList<>();
+
+    @ManyToMany
     private List<Chords> chords = new ArrayList<>();
-
-
 }

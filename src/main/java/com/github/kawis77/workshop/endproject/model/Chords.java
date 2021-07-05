@@ -6,12 +6,14 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "chords")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "songs")
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,12 +26,15 @@ public class Chords {
     private String name;
 
 
-@ManyToOne()
-@JoinColumn(name = "songs_id")
-private Song songs;
+//    @ManyToOne()
+//    @JoinColumn(name = "songs_id")
+//    private Song songs;
 
-    public Chords(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @ManyToMany(mappedBy = "chords")
+    private List<Song> songs = new ArrayList<>();
+
+//    public Chords(Long id, String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
 }

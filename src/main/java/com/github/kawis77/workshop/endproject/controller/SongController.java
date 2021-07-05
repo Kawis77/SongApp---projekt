@@ -30,8 +30,8 @@ public class SongController {
     }
 
     @GetMapping("/onesong/{id}")
-    public String prepareOneSong(Model model , @PathVariable Long id)  {
-        model.addAttribute("onesongs",songRepository.findAll());
+    public String prepareOneSong(Model model, @PathVariable Long id) {
+        model.addAttribute("onesongs", songRepository.findAll());
         model.addAttribute("onesong", songDao.findById(id));
         return "song/onesong";
     }
@@ -56,13 +56,7 @@ public class SongController {
     @GetMapping("/newsong")
     public String addSong(Model model) {
         model.addAttribute("addsong", new Song());
-//        model.addAttribute("chord" , new Chords());
-        model.addAttribute("chords", Arrays.asList(
-                new Chords(1L, "A"),
-                new Chords(2L, "C"),
-                new Chords(3L, "F"),
-                new Chords(4L, "G")
-        ));
+        model.addAttribute("chords", chordsRepository.findAll());
         return "song/create-songs";
     }
 
@@ -74,28 +68,29 @@ public class SongController {
         songRepository.save(song);
         Song savedSong = songRepository.save(song);
         LOGGER.info("savedSong: " + savedSong);
-        return "song/list";
+        return "redirect:/song/list";
 
     }
 
     @GetMapping("/edit/{id}")
-    public String prepareEdit( @PathVariable Long id, Model model) {
+    public String prepareEdit(@PathVariable Long id, Model model) {
         model.addAttribute("editsong", songDao.findById(id));
+        model.addAttribute("chords", chordsRepository.findAll());
         return "song/edit-songs";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit/{id}")
     public String processEdit(Song song, BindingResult bindings) {
         if (bindings.hasErrors()) {
-            return "/user-menu";
+            return "song/user-menu";
         }
         songRepository.save(song);
-        return "redirect:/list";
+        return "redirect:/song/list";
     }
 
     @GetMapping("/delete/{id}")
-    public String prepareDelete( @PathVariable Long id, Model model , Song song1) {
-        model.addAttribute("deletesong",songDao.findById(id));
+    public String prepareDelete(@PathVariable Long id, Model model, Song song1) {
+        model.addAttribute("deletesong", songDao.findById(id));
         return "/song/delete-song";
     }
 
@@ -103,7 +98,7 @@ public class SongController {
     public String processDelete(@PathVariable Long id) {
         Song song = songDao.findById(id);
         songRepository.deleteSongById(song);
-        return "redirect:/song/list";
+        return "/song/list";
     }
 
 }
