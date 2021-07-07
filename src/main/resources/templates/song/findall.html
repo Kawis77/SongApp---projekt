@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new Song</title>
+</head>
+<body>
+<h1>Find Song by your favorite Chords</h1>
+
+
+<form method="POST" th:action="@{/song/findbychords}">
+    <h4>Find Song by your favorite Chords</h4>
+
+    <a>Song chords</a>
+    <div th:each="chord : ${chords}">
+        <span th:text="${chord.name}"></span>
+        <input type="checkbox" th:field="*{chords}" th:value="${chord.id}" >
+        <!--                       th:text="${chord.name}">-->
+    </div>
+    <!--        <input type="text" th:field="*{chords}"/>-->
+
+
+    <button type="submit">Wyslij</button>
+
+
+</form>
+
+</body>
+</html>

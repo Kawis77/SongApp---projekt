@@ -38,5 +38,5 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Song> songs = new ArrayList<>();
 
+    }
 
-}

@@ -18,18 +18,17 @@
         <tr>
             <th>Song Name </th>
             <th>Song Author</th>
-            <th>Song Text</th>
-            <th>Song Chords</th>
+            <th>SongText</th>
+            <th>Check it!</th>
 
         </tr>
         </thead>
         <tbody>
-        <tr th:each="song : ${onesong}">
+        <tr th:each="song : ${findchords}">
             <th th:text="${song.songName}"></th>
             <th th:text="${song.songAuthor}"></th>
             <th th:text="${song.songText}"></th>
-            <th th:text="${song.chords}"></th>
-<!--            <th th:text="${song.songChords}"></th>-->
+            <!--            <th th:text="${song.songChords}"></th>-->
 
         </tbody>
     </table>
