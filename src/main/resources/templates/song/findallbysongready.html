@@ -29,7 +29,11 @@
             <th th:text="${song.songAuthor}"></th>
             <th th:text="${song.songText}"></th>
             <!--            <th th:text="${song.songChords}"></th>-->
+            <td><a th:href="@{/onesong/{id}(id=${song.id})}" } class="btn  btn-primary">Check<a/>
+                <div>
+                    <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
 
+                </div>
         </tbody>
     </table>
 </div>

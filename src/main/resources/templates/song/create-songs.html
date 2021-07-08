@@ -6,7 +6,10 @@
 </head>
 <body>
 <h1>Create new Song</h1>
+<div>
+    <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
 
+</div>
 <form method="POST" th:action="@{/song/newsong}" th:object="${addsong}">
     <h4>Create new Song</h4>
 
@@ -31,7 +34,7 @@
     <button type="submit">Wyslij</button>
 
 
-</form>
 
+</form>
 </body>
 </html>

@@ -14,6 +14,10 @@
 <div class="container m2">
     <h1>Songs list</h1>
     <table border="1" class="table table striped table-responsive-md">
+        <div>
+            <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
+
+        </div>
         <thead>
         <tr>
             <th>Song Name </th>
@@ -31,7 +35,8 @@
 <!--            <th th:text="${song.songChords}"></th>-->
 
 
-            <td> <a th:href="@{/onesong/{id}(id=${song.id})}" } class="btn  btn-primary">Check<a/>
+            <td> <a th:href="@{/song/onesong/{id}(id=${song.id})}" } class="btn  btn-primary">Check<a/>
+
 
 
 

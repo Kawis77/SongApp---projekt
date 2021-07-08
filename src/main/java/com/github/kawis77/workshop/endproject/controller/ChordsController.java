@@ -21,15 +21,4 @@ public class ChordsController {
         this.chordsRepository = chordsRepository;
     }
 
-//    @GetMapping("/addchords")
-//    public String addChord(Model model) {
-//        model.addAttribute("addchords", new Chords());
-//        return "chord/create-chords";
-//    }
-//
-//    @PostMapping("/chords")
-//    public String addChords(@ModelAttribute Chords chords) {
-//        chordsRepository.save(chords);
-//        return "chord/create-chords";
-//    }
 }
