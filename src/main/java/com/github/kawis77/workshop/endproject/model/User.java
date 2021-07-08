@@ -36,6 +36,7 @@ public class User {
     private String role;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Song> songs = new ArrayList<>();
 
     }

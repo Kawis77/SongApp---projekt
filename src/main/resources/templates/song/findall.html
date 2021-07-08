@@ -14,7 +14,8 @@
     <a>Song chords</a>
     <div th:each="chord : ${chords}">
         <span th:text="${chord.name}"></span>
-        <input type="checkbox" th:field="*{chords}" th:value="${chord.id}" >
+        <input type="checkbox" name="chords" th:value="${chord.id}" >
+<!--        <input type="checkbox" th:field="*{chords}" th:value="${chord.id}" >-->
         <!--                       th:text="${chord.name}">-->
     </div>
     <!--        <input type="text" th:field="*{chords}"/>-->

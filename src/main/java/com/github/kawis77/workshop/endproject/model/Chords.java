@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "chords")
 @Getter
 @Setter
-@ToString(exclude = "songs")
+@ToString//(exclude = "songs")
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor

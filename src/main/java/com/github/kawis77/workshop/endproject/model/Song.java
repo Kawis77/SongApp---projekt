@@ -37,5 +37,6 @@ public class Song {
 //    private List<Chords> chords = new ArrayList<>();
 
     @ManyToMany
+    @ToString.Exclude
     private List<Chords> chords = new ArrayList<>();
 }

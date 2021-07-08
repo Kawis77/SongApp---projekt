@@ -24,7 +24,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="song : ${findchords}">
+        <tr th:each="song : ${songs}">
             <th th:text="${song.songName}"></th>
             <th th:text="${song.songAuthor}"></th>
             <th th:text="${song.songText}"></th>
