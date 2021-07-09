@@ -25,14 +25,18 @@
         </thead>
         <tbody>
         <tr th:each="song : ${onesongs}">
-            <th th:text="${song.songName}"></th>
-            <th th:text="${song.songAuthor}"></th>
-            <th th:text="${song.songText}"></th>
-            <th th:text="${chords}"></th>
+            <td th:text="${song.songName}"></td>
+            <td th:text="${song.songAuthor}"></td>
+            <td th:text="${song.songText}"></td>
+            <td>
+                <div th:each="chord : ${song.chords}">
+                    <span th:text="${chord.name}"></span>
+                </div>
+            </td>
 <!--            <th th:text="${song.songChords}"></th>-->
 <div>
-           <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
-
+<!--           <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />-->
+               <a th:href="@{/}" class="btn btn-success">Home Page</a>
 </div>
         </tbody>
 

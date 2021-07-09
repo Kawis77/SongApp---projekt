@@ -16,10 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Logger;
 
 @RequestMapping("/song")
@@ -63,7 +60,10 @@ public class SongController {
     @GetMapping("/onesong/{id}")
     public String prepareOneSong(Model model, @PathVariable Long id) {
         model.addAttribute("onesongs", songRepository.findAll());
-        model.addAttribute("onesong", songDao.findById(id));
+//        model.addAttribute("onesong", songDao.findById(id));
+        Optional<Song> optionalSong = songRepository.findById(id);
+        Song song = optionalSong.orElseThrow(() -> new NoSuchElementException());
+        model.addAttribute("onesong", song);
         return "song/onesong";
     }
 

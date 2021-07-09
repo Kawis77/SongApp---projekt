@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface SongRepository extends JpaRepository<Song, Long> {
 
 
-    Optional<Song> findById(Long id);
+//    Optional<Song> findById(Long id);
 
     void deleteSongById(Song id);
 
