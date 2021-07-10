@@ -10,7 +10,10 @@
           crossorigin="anonymous">
 </head>
 <body>
+<div>
+    <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
 
+</div>
 <div class="container m2">
     <h1>Songs list</h1>
     <table border="1" class="table table striped table-responsive-md">
@@ -32,10 +35,7 @@
 
         <td><a th:href="@{/song/delete/{id}(id=${song.id})}" class="btn btn-danger">Delete<a/></th>
 
-        <div>
-            <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
 
-        </div>
 
     </tr>
 

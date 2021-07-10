@@ -10,6 +10,10 @@
           crossorigin="anonymous">
 </head>
 <body>
+<div>
+    <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
+
+</div>
 
 <div class="container m2">
     <h1>Songs list</h1>
@@ -30,10 +34,7 @@
             <th th:text="${song.songText}"></th>
             <!--            <th th:text="${song.songChords}"></th>-->
             <td><a th:href="@{/song/onesong/{id}(id=${song.id})}" } class="btn  btn-primary">Check<a/>
-                <div>
-                    <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
 
-                </div>
         </tbody>
     </table>
 </div>
