@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Songs list</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container m2">
+    <h1>Songs list</h1>
+    <table border="1" class="table table striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Song Name </th>
+            <th>Song Author</th>
+            <th>Song Text</th>
+            <th>Song Chords</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="song : ${onesongs}">
+            <td th:text="${song.songName}"></td>
+            <td th:text="${song.songAuthor}"></td>
+            <td th:text="${song.songText}"></td>
+            <td>
+                <div th:each="chord : ${song.chords}">
+                    <span th:text="${chord.name}"></span>
+                </div>
+            </td>
+<!--            <th th:text="${song.songChords}"></th>-->
+<div>
+<!--           <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />-->
+               <a th:href="@{/}" class="btn btn-success">Home Page</a>
+</div>
+        </tbody>
+
+    </table>
+</div>
+</body>
+</html>

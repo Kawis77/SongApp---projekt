@@ -22,16 +22,23 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+//    @Column(name = "username")
+    @NotEmpty
+    @Column(unique = true, nullable = false)
+    private String username;
+//    @Column
+//    @Email
+//    private String email;
     @Column(nullable = false)
     @NotEmpty
-    private String userName;
-    @Column
-    @Email
-    private String email;
-    @Column(nullable = false)
-    @NotEmpty
+    @ToString.Exclude
     private String password;
+    @Column
+    private String role;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Song> songs = new ArrayList<>();
-}
+
+    }
+
