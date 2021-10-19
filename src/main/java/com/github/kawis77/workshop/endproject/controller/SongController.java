@@ -24,9 +24,12 @@ import java.util.logging.Logger;
 public class SongController {
     private static final Logger LOGGER = Logger.getLogger(SongController.class.getName());
 
+    //TODO W kolejnej wersji aplikacji wykorzystać serwisy zamiast repozytoriów :)
     private final UserRepository userRepository;
     private final SongRepository songRepository;
     private final ChordsRepository chordsRepository;
+    //TODO Repozytoria mają pełną funkcjonalność entityManager, więc tak długo jak nie robimy
+    //     hack magic, to nie używamy entityManager/dao
     private final SongDao songDao;
 
     public SongController(UserRepository userRepository, SongRepository songRepository, ChordsRepository chordsRepository, SongDao songDao) {
@@ -62,9 +65,14 @@ public class SongController {
         model.addAttribute("onesongs", songRepository.findAll());
 //        model.addAttribute("onesong", songDao.findById(id));
         Optional<Song> optionalSong = songRepository.findById(id);
+        //TODO Optional sam z siebie rzuca NoSuchElementException, więc to jest niepotrzebne
         Song song = optionalSong.orElseThrow(() -> new NoSuchElementException());
-        model.addAttribute("onesong", song);
-        return "song/onesong";
+        if (optionalSong.isPresent()) {
+            model.addAttribute("onesong", song);
+            return "song/onesong";
+        } else {
+            return "redirect:/list";
+        }
     }
 
     @GetMapping("/user-menu")
@@ -74,9 +82,12 @@ public class SongController {
 
         return "song/user-menu";
     }
-    
+
+
     @GetMapping("/list")
     public String prepareList(Model model) {
+        //TODO Chyba tutaj powinny być tylko dla zalogowanego usera :)
+        //     finaAllBy
         model.addAttribute("songs", songRepository.findAll());
 
         return "song/list";
