@@ -1,8 +1,8 @@
 package com.github.kawis77.workshop.endproject.service;
 
 
-import com.github.kawis77.workshop.endproject.model.User;
-import com.github.kawis77.workshop.endproject.repository.UserRepository;
+import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
+import com.github.kawis77.workshop.endproject.dao.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ public class UserMenagerService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void registerUser(User user){
+    public void registerUser(UserEntity user){
         String encodePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);
         user.setRole("ROLE_USER");

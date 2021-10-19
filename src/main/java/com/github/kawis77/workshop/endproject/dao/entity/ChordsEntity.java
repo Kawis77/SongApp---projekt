@@ -1,11 +1,9 @@
-package com.github.kawis77.workshop.endproject.model;
+package com.github.kawis77.workshop.endproject.dao.entity;
 
 
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class Chords {
+public class ChordsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +29,7 @@ public class Chords {
 //    private Song songs;
 
     @ManyToMany(mappedBy = "chords")
-    private List<Song> songs = new ArrayList<>();
+    private List<SongEntity> songs = new ArrayList<>();
 
 //    public Chords(Long id, String name) {
 //        this.id = id;

@@ -1,15 +1,13 @@
 package com.github.kawis77.workshop.endproject.dao;
 
 
-import com.github.kawis77.workshop.endproject.model.Chords;
-import com.github.kawis77.workshop.endproject.model.Song;
+import com.github.kawis77.workshop.endproject.dao.entity.SongEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 
 @Repository
@@ -19,19 +17,19 @@ public class SongDao {
     @PersistenceContext
     protected EntityManager em;
 
-    public void save(Song entity) {
+    public void save(SongEntity entity) {
         em.persist(entity);
     }
 
-    public Song update(Song entity) {
+    public SongEntity update(SongEntity entity) {
         return em.merge(entity);
     }
 
-    public Song findById(Long id) {
-        return em.find(Song.class, id);
+    public SongEntity findById(Long id) {
+        return em.find(SongEntity.class, id);
     }
 
-    public void remove(Song entity) {
+    public void remove(SongEntity entity) {
         em.remove(em.contains(entity) ? entity : em.merge(entity));
     }
 

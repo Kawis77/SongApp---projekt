@@ -1,8 +1,7 @@
-package com.github.kawis77.workshop.endproject.controller;
+package com.github.kawis77.workshop.endproject.web.controller;
 
-import com.github.kawis77.workshop.endproject.model.Song;
-import com.github.kawis77.workshop.endproject.model.User;
-import com.github.kawis77.workshop.endproject.repository.UserRepository;
+import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
+import com.github.kawis77.workshop.endproject.dao.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +21,12 @@ public class UserController {
 
     @GetMapping("/newuser")
     public String addUser1(Model model) {
-        model.addAttribute("adduser", new User());
+        model.addAttribute("adduser", new UserEntity());
         return "user/create-user";
     }
 
     @PostMapping("/adduser")
-    public String addUser(User user) {
+    public String addUser(UserEntity user) {
         userRepository.save(user);
         return "user/created";
     }

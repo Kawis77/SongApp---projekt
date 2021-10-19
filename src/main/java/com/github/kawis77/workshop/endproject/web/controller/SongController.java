@@ -1,14 +1,14 @@
-package com.github.kawis77.workshop.endproject.controller;
+package com.github.kawis77.workshop.endproject.web.controller;
 
 
 import com.github.kawis77.workshop.endproject.dao.SongDao;
-import com.github.kawis77.workshop.endproject.model.Chords;
-import com.github.kawis77.workshop.endproject.model.Song;
-import com.github.kawis77.workshop.endproject.model.SongRequest;
-import com.github.kawis77.workshop.endproject.model.User;
-import com.github.kawis77.workshop.endproject.repository.ChordsRepository;
-import com.github.kawis77.workshop.endproject.repository.SongRepository;
-import com.github.kawis77.workshop.endproject.repository.UserRepository;
+import com.github.kawis77.workshop.endproject.dao.entity.ChordsEntity;
+import com.github.kawis77.workshop.endproject.dao.entity.SongEntity;
+import com.github.kawis77.workshop.endproject.web.model.SongRequest;
+import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
+import com.github.kawis77.workshop.endproject.dao.repository.ChordsRepository;
+import com.github.kawis77.workshop.endproject.dao.repository.SongRepository;
+import com.github.kawis77.workshop.endproject.dao.repository.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,10 +49,10 @@ public class SongController {
     @PostMapping("/findbychords")
     public String processEdit(Model model, SongRequest songRequest) {
         LOGGER.info("processEdit(" + songRequest + ")");
-        List<Chords> chords = chordsRepository.findAllById(songRequest.getChords());
+        List<ChordsEntity> chords = chordsRepository.findAllById(songRequest.getChords());
 
-        Set<Song> songs = new HashSet<>();
-        for (Chords chord : chords) {
+        Set<SongEntity> songs = new HashSet<>();
+        for (ChordsEntity chord : chords) {
             songs.addAll(chord.getSongs());
         }
 
@@ -64,9 +64,9 @@ public class SongController {
     public String prepareOneSong(Model model, @PathVariable Long id) {
         model.addAttribute("onesongs", songRepository.findAll());
 //        model.addAttribute("onesong", songDao.findById(id));
-        Optional<Song> optionalSong = songRepository.findById(id);
+        Optional<SongEntity> optionalSong = songRepository.findById(id);
         //TODO Optional sam z siebie rzuca NoSuchElementException, więc to jest niepotrzebne
-        Song song = optionalSong.orElseThrow(() -> new NoSuchElementException());
+        SongEntity song = optionalSong.orElseThrow(() -> new NoSuchElementException());
         if (optionalSong.isPresent()) {
             model.addAttribute("onesong", song);
             return "song/onesong";
@@ -96,21 +96,21 @@ public class SongController {
 
     @GetMapping("/newsong")
     public String addSong(Model model, Principal userUser) {
-        model.addAttribute("addsong", new Song());
+        model.addAttribute("addsong", new SongEntity());
         model.addAttribute("chords", chordsRepository.findAll());
         return "song/create-songs";
     }
 
     @PostMapping("/newsong")
-    public String addSong(Song song, @RequestParam(name = "username") String username) {
+    public String addSong(SongEntity song, @RequestParam(name = "username") String username) {
         LOGGER.info("addSong(" + song + "," + username + ")");
 //         Chords checkChords = chordsRepository.findById(id);
 //         chordsList.add(checkChords);
-        Optional<User> userOptional = userRepository.findByUsername(username);
-        User user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
+        Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+        UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
         song.setUser(user);
         songRepository.save(song);
-        Song savedSong = songRepository.save(song);
+        SongEntity savedSong = songRepository.save(song);
         LOGGER.info("savedSong: " + savedSong);
         return "redirect:/song/list";
 
@@ -124,7 +124,7 @@ public class SongController {
     }
 
     @PostMapping("/edit/{id}")
-    public String processEdit(Song song, BindingResult bindings) {
+    public String processEdit(SongEntity song, BindingResult bindings) {
         if (bindings.hasErrors()) {
             return "song/user-menu";
         }
@@ -140,7 +140,7 @@ public class SongController {
 
     @PostMapping("/delete/{id}")
     public String processDelete(@PathVariable Long id) {
-        Song song = songDao.findById(id);
+        SongEntity song = songDao.findById(id);
         songRepository.delete(song);
         return "/song/list";
     }

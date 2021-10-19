@@ -1,4 +1,4 @@
-package com.github.kawis77.workshop.endproject.model;
+package com.github.kawis77.workshop.endproject.web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
