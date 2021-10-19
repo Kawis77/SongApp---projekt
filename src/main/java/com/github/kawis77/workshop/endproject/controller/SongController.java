@@ -74,8 +74,7 @@ public class SongController {
 
         return "song/user-menu";
     }
-
-
+    
     @GetMapping("/list")
     public String prepareList(Model model) {
         model.addAttribute("songs", songRepository.findAll());
