@@ -1,6 +1,6 @@
 package com.github.kawis77.workshop.endproject.service;
 
-import com.github.kawis77.workshop.endproject.repository.SongRepository;
+import com.github.kawis77.workshop.endproject.dao.repository.SongRepository;
 import org.springframework.stereotype.Service;
 
 @Service

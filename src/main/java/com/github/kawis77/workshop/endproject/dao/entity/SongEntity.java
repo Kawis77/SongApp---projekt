@@ -1,4 +1,4 @@
-package com.github.kawis77.workshop.endproject.model;
+package com.github.kawis77.workshop.endproject.dao.entity;
 
 
 import lombok.*;
@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class Song {
+public class SongEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class Song {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
 
 //    @Column(name = "chords")
@@ -38,5 +38,5 @@ public class Song {
 
     @ManyToMany
     @ToString.Exclude
-    private List<Chords> chords = new ArrayList<>();
+    private List<ChordsEntity> chords = new ArrayList<>();
 }

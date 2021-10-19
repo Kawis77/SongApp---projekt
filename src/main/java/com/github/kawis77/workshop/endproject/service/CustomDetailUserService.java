@@ -1,7 +1,7 @@
 package com.github.kawis77.workshop.endproject.service;
 
-import com.github.kawis77.workshop.endproject.model.User;
-import com.github.kawis77.workshop.endproject.repository.UserRepository;
+import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
+import com.github.kawis77.workshop.endproject.dao.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +23,7 @@ public class CustomDetailUserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<User> optionalUser = userRepository.findByUsername(username);
+        Optional<UserEntity> optionalUser = userRepository.findByUsername(username);
         return optionalUser
                 .map(user -> new org.springframework.security.core.userdetails.User(
                         user.getUsername(),
