@@ -21,11 +21,11 @@ public class SongEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String songName;
+    private String name;
     @Column(nullable = false)
-    private String songAuthor;
+    private String author;
     @Column(nullable = false)
-    private String songText;
+    private String text;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
