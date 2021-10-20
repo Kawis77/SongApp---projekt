@@ -21,13 +21,11 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @Column(name = "username")
+
     @NotEmpty
     @Column(unique = true, nullable = false)
     private String username;
-//    @Column
-//    @Email
-//    private String email;
+
     @Column(nullable = false)
     @NotEmpty
     @ToString.Exclude

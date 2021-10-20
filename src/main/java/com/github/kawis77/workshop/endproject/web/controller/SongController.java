@@ -4,6 +4,7 @@ package com.github.kawis77.workshop.endproject.web.controller;
 import com.github.kawis77.workshop.endproject.dao.SongDao;
 import com.github.kawis77.workshop.endproject.dao.entity.ChordsEntity;
 import com.github.kawis77.workshop.endproject.dao.entity.SongEntity;
+import com.github.kawis77.workshop.endproject.service.SongService;
 import com.github.kawis77.workshop.endproject.web.model.SongRequest;
 import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
 import com.github.kawis77.workshop.endproject.dao.repository.ChordsRepository;
@@ -25,6 +26,7 @@ public class SongController {
     private static final Logger LOGGER = Logger.getLogger(SongController.class.getName());
 
     //TODO W kolejnej wersji aplikacji wykorzystać serwisy zamiast repozytoriów :)
+    private final SongService songService;
     private final UserRepository userRepository;
     private final SongRepository songRepository;
     private final ChordsRepository chordsRepository;
@@ -32,7 +34,8 @@ public class SongController {
     //     hack magic, to nie używamy entityManager/dao
     private final SongDao songDao;
 
-    public SongController(UserRepository userRepository, SongRepository songRepository, ChordsRepository chordsRepository, SongDao songDao) {
+    public SongController(SongService songService, UserRepository userRepository, SongRepository songRepository, ChordsRepository chordsRepository, SongDao songDao) {
+        this.songService = songService;
         this.userRepository = userRepository;
         this.songRepository = songRepository;
         this.chordsRepository = chordsRepository;
@@ -109,7 +112,7 @@ public class SongController {
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
         UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
         song.setUser(user);
-        songRepository.save(song);
+        songService.create(song);
         SongEntity savedSong = songRepository.save(song);
         LOGGER.info("savedSong: " + savedSong);
         return "redirect:/song/list";

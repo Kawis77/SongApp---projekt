@@ -29,9 +29,9 @@
         </thead>
         <tbody>
         <tr th:each="song : ${songs}">
-            <th th:text="${song.songName}"></th>
-            <th th:text="${song.songAuthor}"></th>
-            <th th:text="${song.songText}"></th>
+            <th th:text="${song.name}"></th>
+            <th th:text="${song.author}"></th>
+            <th th:text="${song.text}"></th>
             <!--            <th th:text="${song.songChords}"></th>-->
             <td><a th:href="@{/song/onesong/{id}(id=${song.id})}" } class="btn  btn-primary">Check<a/>
 

@@ -19,11 +19,11 @@
 
 
     <a>Song name</a>
-    <input type="text" th:field="*{songName}"/>
+    <input type="text" th:field="*{name}"/>
     <a>Song Aurhor</a>
-    <input type="text" th:field="*{songAuthor}"/>
+    <input type="text" th:field="*{author}"/>
     <a>Song text</a>
-    <input type="text" th:field="*{songText}"/>
+    <input type="text" th:field="*{text}"/>
     <input type="hidden" name="username" th:value="${#authentication.name}"/>
 
     <a>Song chords</a>
