@@ -112,7 +112,7 @@ public class SongController {
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
         UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
         song.setUser(user);
-        songService.create(song);
+        songRepository.save(song);
         SongEntity savedSong = songRepository.save(song);
         LOGGER.info("savedSong: " + savedSong);
         return "redirect:/song/list";
