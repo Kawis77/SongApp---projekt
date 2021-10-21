@@ -4,6 +4,7 @@ package com.github.kawis77.workshop.endproject.web.controller;
 import com.github.kawis77.workshop.endproject.dao.SongDao;
 import com.github.kawis77.workshop.endproject.dao.entity.ChordsEntity;
 import com.github.kawis77.workshop.endproject.dao.entity.SongEntity;
+import com.github.kawis77.workshop.endproject.service.ChordsService;
 import com.github.kawis77.workshop.endproject.service.SongService;
 import com.github.kawis77.workshop.endproject.web.model.SongRequest;
 import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
@@ -25,35 +26,31 @@ import java.util.logging.Logger;
 public class SongController {
     private static final Logger LOGGER = Logger.getLogger(SongController.class.getName());
 
-    //TODO W kolejnej wersji aplikacji wykorzystać serwisy zamiast repozytoriów :)
     private final SongService songService;
     private final UserRepository userRepository;
     private final SongRepository songRepository;
-    private final ChordsRepository chordsRepository;
-    //TODO Repozytoria mają pełną funkcjonalność entityManager, więc tak długo jak nie robimy
-    //     hack magic, to nie używamy entityManager/dao
+    private final ChordsService chordsService;
     private final SongDao songDao;
 
-    public SongController(SongService songService, UserRepository userRepository, SongRepository songRepository, ChordsRepository chordsRepository, SongDao songDao) {
+    public SongController(SongService songService, UserRepository userRepository, SongRepository songRepository, ChordsRepository chordsRepository, ChordsService chordsService, SongDao songDao) {
         this.songService = songService;
         this.userRepository = userRepository;
         this.songRepository = songRepository;
-        this.chordsRepository = chordsRepository;
+        this.chordsService = chordsService;
         this.songDao = songDao;
     }
 
 
     @GetMapping("/findbychords")
-    public String prepareFindbySong(Model model) {
-        model.addAttribute("chords", chordsRepository.findAll());
+    public String prepareFindBySong(Model model) {
+        model.addAttribute("chords", chordsService.allChords());
         return "song/findall";
     }
 
     @PostMapping("/findbychords")
     public String processEdit(Model model, SongRequest songRequest) {
         LOGGER.info("processEdit(" + songRequest + ")");
-        List<ChordsEntity> chords = chordsRepository.findAllById(songRequest.getChords());
-
+        List<ChordsEntity> chords = chordsService.findAllById(songRequest.getChords());
         Set<SongEntity> songs = new HashSet<>();
         for (ChordsEntity chord : chords) {
             songs.addAll(chord.getSongs());
@@ -100,7 +97,7 @@ public class SongController {
     @GetMapping("/newsong")
     public String addSong(Model model, Principal userUser) {
         model.addAttribute("addsong", new SongEntity());
-        model.addAttribute("chords", chordsRepository.findAll());
+        model.addAttribute("chords", chordsService.allChords());
         return "song/create-songs";
     }
 
@@ -122,7 +119,7 @@ public class SongController {
     @GetMapping("/edit/{id}")
     public String prepareEdit(@PathVariable Long id, Model model) {
         model.addAttribute("editsong", songDao.findById(id));
-        model.addAttribute("chords", chordsRepository.findAll());
+        model.addAttribute("chords",  chordsService.allChords());
         return "song/edit-songs";
     }
 
