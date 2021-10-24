@@ -7,6 +7,7 @@ import com.github.kawis77.workshop.endproject.web.model.SongModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SongService {
@@ -22,4 +23,12 @@ public class SongService {
         return songRepository.findAll();
     }
 
+    public Optional<SongEntity> findById( long id){
+        return songRepository.findById(id);
+    }
+
+    public SongEntity create(SongModel songModel){
+        SongEntity songEntity = songMapper.fromModel(songModel);
+        return songRepository.save(songEntity);
+    }
 }
