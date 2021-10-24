@@ -6,6 +6,7 @@ import com.github.kawis77.workshop.endproject.dao.entity.ChordsEntity;
 import com.github.kawis77.workshop.endproject.dao.entity.SongEntity;
 import com.github.kawis77.workshop.endproject.service.ChordsService;
 import com.github.kawis77.workshop.endproject.service.SongService;
+import com.github.kawis77.workshop.endproject.web.model.SongModel;
 import com.github.kawis77.workshop.endproject.web.model.SongRequest;
 import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
 import com.github.kawis77.workshop.endproject.dao.repository.ChordsRepository;
@@ -62,23 +63,21 @@ public class SongController {
 
     @GetMapping("/onesong/{id}")
     public String prepareOneSong(Model model, @PathVariable Long id) {
-        model.addAttribute("onesongs", songRepository.findAll());
-//        model.addAttribute("onesong", songDao.findById(id));
-        Optional<SongEntity> optionalSong = songRepository.findById(id);
-        //TODO Optional sam z siebie rzuca NoSuchElementException, więc to jest niepotrzebne
-        SongEntity song = optionalSong.orElseThrow(() -> new NoSuchElementException());
-        if (optionalSong.isPresent()) {
-            model.addAttribute("onesong", song);
+        model.addAttribute("onesongs", songService.allSongs());
+        Optional<SongEntity> optionalSong = songService.findById(id);
+//        SongEntity song = optionalSong.orElseThrow(() -> new NoSuchElementException());
+//        if (optionalSong.isPresent()) {
+            model.addAttribute("onesong",optionalSong);
             return "song/onesong";
-        } else {
-            return "redirect:/list";
-        }
+//        } else {
+//            return "redirect:/list";
+//        }
     }
 
     @GetMapping("/user-menu")
     public String prepareUserMenu(Model model) {
 
-        model.addAttribute("usermenu", songRepository.findAll());
+        model.addAttribute("usermenu", songService.allSongs());
 
         return "song/user-menu";
     }
@@ -86,8 +85,6 @@ public class SongController {
 
     @GetMapping("/list")
     public String prepareList(Model model) {
-        //TODO Chyba tutaj powinny być tylko dla zalogowanego usera :)
-        //     finaAllBy
         model.addAttribute("songs", songRepository.findAll());
 
         return "song/list";
@@ -95,22 +92,20 @@ public class SongController {
 
 
     @GetMapping("/newsong")
-    public String addSong(Model model, Principal userUser) {
+    public String addSong(Model model) {
         model.addAttribute("addsong", new SongEntity());
         model.addAttribute("chords", chordsService.allChords());
         return "song/create-songs";
     }
 
     @PostMapping("/newsong")
-    public String addSong(SongEntity song, @RequestParam(name = "username") String username) {
-        LOGGER.info("addSong(" + song + "," + username + ")");
-//         Chords checkChords = chordsRepository.findById(id);
-//         chordsList.add(checkChords);
+    public String addSong(SongModel songModel, @RequestParam(name = "username") String username) {
+        LOGGER.info("addSong(" + songModel + "," + username + ")");
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
         UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
-        song.setUser(user);
-        songRepository.save(song);
-        SongEntity savedSong = songRepository.save(song);
+        songModel.setUser(user);
+        songService.create(songModel);
+        SongEntity savedSong = songService.create(songModel);
         LOGGER.info("savedSong: " + savedSong);
         return "redirect:/song/list";
 
@@ -118,22 +113,24 @@ public class SongController {
 
     @GetMapping("/edit/{id}")
     public String prepareEdit(@PathVariable Long id, Model model) {
+//        Optional<SongEntity> optionalSong= songService.findById(id);
         model.addAttribute("editsong", songDao.findById(id));
         model.addAttribute("chords",  chordsService.allChords());
         return "song/edit-songs";
     }
 
     @PostMapping("/edit/{id}")
-    public String processEdit(SongEntity song, BindingResult bindings) {
+    public String processEdit(SongModel songModel, BindingResult bindings) {
         if (bindings.hasErrors()) {
             return "song/user-menu";
         }
-        songRepository.save(song);
+        songService.create(songModel);
         return "redirect:/song/list";
     }
 
     @GetMapping("/delete/{id}")
     public String prepareDelete(@PathVariable Long id, Model model) {
+//        Optional<SongEntity> optionalSongEntity = songService.findById(id);
         model.addAttribute("deletesong", songDao.findById(id));
         return "/song/delete-song";
     }
