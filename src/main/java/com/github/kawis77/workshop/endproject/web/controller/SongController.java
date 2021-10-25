@@ -104,7 +104,6 @@ public class SongController {
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
         UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
         songModel.setUser(user);
-        songService.create(songModel);
         SongEntity savedSong = songService.create(songModel);
         LOGGER.info("savedSong: " + savedSong);
         return "redirect:/song/list";
@@ -113,8 +112,8 @@ public class SongController {
 
     @GetMapping("/edit/{id}")
     public String prepareEdit(@PathVariable Long id, Model model) {
-//        Optional<SongEntity> optionalSong= songService.findById(id);
-        model.addAttribute("editsong", songDao.findById(id));
+        Optional<SongEntity> optionalSong= songService.findById(id);
+        model.addAttribute("editsong", optionalSong.get());
         model.addAttribute("chords",  chordsService.allChords());
         return "song/edit-songs";
     }
@@ -130,14 +129,15 @@ public class SongController {
 
     @GetMapping("/delete/{id}")
     public String prepareDelete(@PathVariable Long id, Model model) {
-//        Optional<SongEntity> optionalSongEntity = songService.findById(id);
-        model.addAttribute("deletesong", songDao.findById(id));
+        Optional<SongEntity> optionalSongEntity = songService.findById(id);
+        model.addAttribute("deletesong", optionalSongEntity.get());
         return "/song/delete-song";
     }
 
     @PostMapping("/delete/{id}")
     public String processDelete(@PathVariable Long id) {
-        SongEntity song = songDao.findById(id);
+        Optional<SongEntity> optionalSongEntity = songService.findById(id);
+        SongEntity song = optionalSongEntity.get();
         songRepository.delete(song);
         return "/song/list";
     }
