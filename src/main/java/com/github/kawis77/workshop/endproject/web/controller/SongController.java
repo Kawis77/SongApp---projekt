@@ -1,11 +1,9 @@
 package com.github.kawis77.workshop.endproject.web.controller;
-
-
-import com.github.kawis77.workshop.endproject.dao.SongDao;
 import com.github.kawis77.workshop.endproject.dao.entity.ChordsEntity;
 import com.github.kawis77.workshop.endproject.dao.entity.SongEntity;
 import com.github.kawis77.workshop.endproject.service.ChordsService;
 import com.github.kawis77.workshop.endproject.service.SongService;
+import com.github.kawis77.workshop.endproject.service.UserService;
 import com.github.kawis77.workshop.endproject.web.model.SongModel;
 import com.github.kawis77.workshop.endproject.web.model.SongRequest;
 import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
@@ -17,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -31,14 +27,14 @@ public class SongController {
     private final UserRepository userRepository;
     private final SongRepository songRepository;
     private final ChordsService chordsService;
-    private final SongDao songDao;
+    private final UserService userService;
 
-    public SongController(SongService songService, UserRepository userRepository, SongRepository songRepository, ChordsRepository chordsRepository, ChordsService chordsService, SongDao songDao) {
+    public SongController(SongService songService, UserRepository userRepository, SongRepository songRepository, ChordsRepository chordsRepository, ChordsService chordsService, UserService userService) {
         this.songService = songService;
         this.userRepository = userRepository;
         this.songRepository = songRepository;
         this.chordsService = chordsService;
-        this.songDao = songDao;
+        this.userService = userService;
     }
 
 
@@ -101,7 +97,7 @@ public class SongController {
     @PostMapping("/newsong")
     public String addSong(SongModel songModel, @RequestParam(name = "username") String username) {
         LOGGER.info("addSong(" + songModel + "," + username + ")");
-        Optional<UserEntity> userOptional = userRepository.findByUsername(username);
+        Optional<UserEntity> userOptional = userService.findByUserName(username);
         UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
         songModel.setUser(user);
         SongEntity savedSong = songService.create(songModel);
