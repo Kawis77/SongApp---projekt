@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -24,15 +25,11 @@ public class SongController {
     private static final Logger LOGGER = Logger.getLogger(SongController.class.getName());
 
     private final SongService songService;
-    private final UserRepository userRepository;
-    private final SongRepository songRepository;
     private final ChordsService chordsService;
     private final UserService userService;
 
-    public SongController(SongService songService, UserRepository userRepository, SongRepository songRepository, ChordsRepository chordsRepository, ChordsService chordsService, UserService userService) {
+    public SongController(SongService songService, ChordsService chordsService, UserService userService) {
         this.songService = songService;
-        this.userRepository = userRepository;
-        this.songRepository = songRepository;
         this.chordsService = chordsService;
         this.userService = userService;
     }
@@ -61,13 +58,8 @@ public class SongController {
     public String prepareOneSong(Model model, @PathVariable Long id) {
         model.addAttribute("onesongs", songService.allSongs());
         Optional<SongEntity> optionalSong = songService.findById(id);
-//        SongEntity song = optionalSong.orElseThrow(() -> new NoSuchElementException());
-//        if (optionalSong.isPresent()) {
-            model.addAttribute("onesong",optionalSong);
-            return "song/onesong";
-//        } else {
-//            return "redirect:/list";
-//        }
+        model.addAttribute("onesong", optionalSong);
+        return "song/onesong";
     }
 
     @GetMapping("/user-menu")
@@ -81,8 +73,7 @@ public class SongController {
 
     @GetMapping("/list")
     public String prepareList(Model model) {
-        model.addAttribute("songs", songRepository.findAll());
-
+        model.addAttribute("songs",songService.allSongs());
         return "song/list";
     }
 
@@ -108,9 +99,9 @@ public class SongController {
 
     @GetMapping("/edit/{id}")
     public String prepareEdit(@PathVariable Long id, Model model) {
-        Optional<SongEntity> optionalSong= songService.findById(id);
+        Optional<SongEntity> optionalSong = songService.findById(id);
         model.addAttribute("editsong", optionalSong.get());
-        model.addAttribute("chords",  chordsService.allChords());
+        model.addAttribute("chords", chordsService.allChords());
         return "song/edit-songs";
     }
 
@@ -134,7 +125,7 @@ public class SongController {
     public String processDelete(@PathVariable Long id) {
         Optional<SongEntity> optionalSongEntity = songService.findById(id);
         SongEntity song = optionalSongEntity.get();
-        songRepository.delete(song);
+        songService.delete(song);
         return "/song/list";
     }
 

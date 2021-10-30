@@ -19,16 +19,20 @@ public class SongService {
         this.songMapper = songMapper;
     }
 
-    public List<SongEntity> allSongs(){
+    public List<SongEntity> allSongs() {
         return songRepository.findAll();
     }
 
-    public Optional<SongEntity> findById( long id){
+    public Optional<SongEntity> findById(long id) {
         return songRepository.findById(id);
     }
 
-    public SongEntity create(SongModel songModel){
+    public SongEntity create(SongModel songModel) {
         SongEntity songEntity = songMapper.fromModel(songModel);
         return songRepository.save(songEntity);
+    }
+
+    public void delete(SongEntity songEntity) {
+        songRepository.delete(songEntity);
     }
 }
