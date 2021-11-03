@@ -10,12 +10,14 @@ import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
 import com.github.kawis77.workshop.endproject.dao.repository.ChordsRepository;
 import com.github.kawis77.workshop.endproject.dao.repository.SongRepository;
 import com.github.kawis77.workshop.endproject.dao.repository.UserRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 import java.util.logging.Logger;
 
