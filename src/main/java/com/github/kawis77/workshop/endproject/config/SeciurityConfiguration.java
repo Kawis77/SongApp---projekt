@@ -27,16 +27,9 @@ public class SeciurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-//                .userDetailsService(userDetailsService()) bląd :D
                 .userDetailsService(customDetailUserService)
                 .passwordEncoder(passwordEncoder());
     }
-//
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        super.configure(web);
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()

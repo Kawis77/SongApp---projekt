@@ -31,11 +31,6 @@ public class SongEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-
-//    @Column(name = "chords")
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<Chords> chords = new ArrayList<>();
-
     @ManyToMany
     @ToString.Exclude
     private List<ChordsEntity> chords = new ArrayList<>();
