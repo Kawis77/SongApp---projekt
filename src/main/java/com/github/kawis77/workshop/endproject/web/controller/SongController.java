@@ -91,7 +91,7 @@ public class SongController {
     public String addSong(SongModel songModel, @RequestParam(name = "username") String username) {
         LOGGER.info("addSong(" + songModel + "," + username + ")");
         Optional<UserEntity> userOptional = userService.findByUserName(username);
-        UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
+        UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));;
         songModel.setUser(user);
         SongEntity savedSong = songService.create(songModel);
         LOGGER.info("savedSong: " + savedSong);
