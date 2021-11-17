@@ -10,6 +10,11 @@
 </head>
 
 <body>
+<div>
+    <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
+
+</div>
+
 <h1>Create new Song</h1>
 <div>
     <a th:href="@{/}" class="btn btn-success">Home Page</a>
@@ -18,7 +23,7 @@
     <h4>Create new Song</h4>
 
 
-    <a>Song name</a>
+    <a>Song Name</a>
     <input type="text" th:field="*{name}"/>
     <a>Song Aurhor</a>
     <input type="text" th:field="*{author}"/>
@@ -30,12 +35,10 @@
     <div th:each="chord : ${chords}">
         <span th:text="${chord.name}"></span>
         <input type="checkbox" th:field="*{chords}" th:value="${chord.id}" >
-<!--                       th:text="${chord.name}">-->
     </div>
-<!--        <input type="text" th:field="*{chords}"/>-->
 
 
-    <button type="submit">Wyslij</button>
+    <button type="submit">Send</button>
 
 
 

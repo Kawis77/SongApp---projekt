@@ -4,11 +4,15 @@
     <title>Delete song</title>
 </head>
 <body>
+<div>
+    <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
+
+</div>
 <form method="POST" th:action="@{/song/delete/{id}(id=${deletesong.id})}" th:object="${deletesong}">
     <p>You wany delete this song ?</p>
     <p>
         <input th:type="hidden" th:name="${id}" th:value="${deletesong.id}"/>
-        <a href="/song/list">Nie</a><button th:type="submit">Tak</button>
+        <a href="/song/list">No</a><button th:type="submit">Yes</button>
     </p>
 </form>
 </body>

@@ -58,9 +58,10 @@ public class SongController {
 
     @GetMapping("/onesong/{id}")
     public String prepareOneSong(Model model, @PathVariable Long id) {
+        Optional<SongEntity> optionalSongEntity = songService.findById(id);
+        SongEntity songEntity = optionalSongEntity.orElseThrow(() -> new NoSuchElementException());
         model.addAttribute("onesongs", songService.allSongs());
-        Optional<SongEntity> optionalSong = songService.findById(id);
-        model.addAttribute("onesong", optionalSong);
+        model.addAttribute("onesong", songEntity);
         return "song/onesong";
     }
 
