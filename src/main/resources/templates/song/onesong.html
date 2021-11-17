@@ -12,6 +12,10 @@
 <div class="container m2">
     <h1>Song details</h1>
     <table border="1" class="table table striped table-responsive-md">
+        <div>
+            <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
+
+        </div>
         <thead>
         <tr>
             <th>Name </th>
@@ -26,7 +30,11 @@
             <td th:text="${onesong.name}"></td>
             <td th:text="${onesong.author}"></td>
             <td th:text="${onesong.text}"></td>
-
+            <td>
+                <div th:each="onechord: ${onesong.chords}">
+                    <span th:text="${onechord.name}"></span>
+                </div>
+            </td>
         </tbody>
 
     </table>

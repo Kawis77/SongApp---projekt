@@ -9,6 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface ChordsRepository extends JpaRepository<ChordsEntity, Long> {
+
+    List<String> findAllBySongs(Long id);
     Optional<ChordsEntity> findById(Long id);
     @Override
     List<ChordsEntity> findAll();

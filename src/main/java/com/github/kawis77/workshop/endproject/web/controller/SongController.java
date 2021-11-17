@@ -1,4 +1,5 @@
 package com.github.kawis77.workshop.endproject.web.controller;
+
 import com.github.kawis77.workshop.endproject.dao.entity.ChordsEntity;
 import com.github.kawis77.workshop.endproject.dao.entity.SongEntity;
 import com.github.kawis77.workshop.endproject.service.ChordsService;
@@ -76,7 +77,7 @@ public class SongController {
 
     @GetMapping("/list")
     public String prepareList(Model model) {
-        model.addAttribute("songs",songService.allSongs());
+        model.addAttribute("songs", songService.allSongs());
         return "song/list";
     }
 
@@ -92,7 +93,8 @@ public class SongController {
     public String addSong(SongModel songModel, @RequestParam(name = "username") String username) {
         LOGGER.info("addSong(" + songModel + "," + username + ")");
         Optional<UserEntity> userOptional = userService.findByUserName(username);
-        UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));;
+        UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
+        ;
         songModel.setUser(user);
         SongEntity savedSong = songService.create(songModel);
         LOGGER.info("savedSong: " + savedSong);

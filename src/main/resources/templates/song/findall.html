@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Create new Song</title>
+    <title>Find By Chords</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -13,11 +13,10 @@
     <input type="button" class="btn btn-lg btn-success" onclick="location.href='/';" value="Home page" />
 
 </div>
+
 <h1>Find Song by your favorite Chords</h1>
-
-
 <form method="POST" th:action="@{/song/findbychords}">
-    <h4>Find Song by your favorite Chords</h4>
+
     <a>Song chords</a>
     <div th:each="chord : ${chords}">
         <span th:text="${chord.name}"></span>
