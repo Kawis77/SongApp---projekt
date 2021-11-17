@@ -20,13 +20,14 @@ public class RegistrationController {
     }
 
     @GetMapping("/register")
-    public String prepareRegistration(Model model){
+    public String prepareRegistration(Model model) {
         model.addAttribute("user", new UserEntity());
         return "registration";
 
     }
+
     @PostMapping("/register")
-    public String proccesRegistriation(UserModel userModel){
+    public String proccesRegistriation(UserModel userModel) {
         userMenagerService.registerUser(userModel);
         return "redirect:/login";
     }

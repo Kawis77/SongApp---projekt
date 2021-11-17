@@ -1,6 +1,5 @@
 package com.github.kawis77.workshop.endproject.dao.entity;
 
-
 import lombok.*;
 
 import javax.persistence.*;

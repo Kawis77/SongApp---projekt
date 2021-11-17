@@ -18,7 +18,6 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-
     @GetMapping("/newuser")
     public String addUser1(Model model) {
         model.addAttribute("adduser", new UserEntity());

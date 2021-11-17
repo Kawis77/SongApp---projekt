@@ -11,5 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SongRequest {
+
     private List<Long> chords = new ArrayList<>();
 }

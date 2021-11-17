@@ -23,7 +23,7 @@ public class UserMenagerService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void registerUser(UserModel user){
+    public void registerUser(UserModel user) {
         String encodePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);
         user.setRole("ROLE_USER");

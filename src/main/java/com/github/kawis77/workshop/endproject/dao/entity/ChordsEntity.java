@@ -1,6 +1,5 @@
 package com.github.kawis77.workshop.endproject.dao.entity;
 
-
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,16 +22,7 @@ public class ChordsEntity {
     @Column(unique = false)
     private String name;
 
-
-//    @ManyToOne()
-//    @JoinColumn(name = "songs_id")
-//    private Song songs;
-
     @ManyToMany(mappedBy = "chords")
     private List<SongEntity> songs = new ArrayList<>();
 
-//    public Chords(Long id, String name) {
-//        this.id = id;
-//        this.name = name;
-//    }
 }

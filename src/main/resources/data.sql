@@ -10,7 +10,7 @@ insert into songs (id , name ,author , text ,user_id) values (2 , 'Forever Young
 insert into songs (id , name ,author , text ,user_id) values (3 , 'Venus' , 'Shocking Blue' , '...', 1 );
 insert into songs (id , name ,author , text,user_id) values (4 , 'Take My Breath' , 'Berlin' , '...' , 1 );
 
-insert into songs_chords(songs_id , chords_id) values (1 , 1);
-insert into songs_chords(songs_id , chords_id) values (2 , 2);
+insert into songs_chords(songs_id , chords_id ) values (1 , 1);
+insert into songs_chords(songs_id , chords_id) values (2 , 2 );
 insert into songs_chords(songs_id , chords_id) values (3 , 3);
 insert into songs_chords(songs_id , chords_id) values (4 , 4);
