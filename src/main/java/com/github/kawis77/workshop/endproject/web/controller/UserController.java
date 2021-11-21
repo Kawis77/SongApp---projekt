@@ -19,13 +19,13 @@ public class UserController {
     }
 
     @GetMapping("/newuser")
-    public String addUser1(Model model) {
+    public String prepareAddUser(Model model) {
         model.addAttribute("adduser", new UserEntity());
         return "user/create-user";
     }
 
     @PostMapping("/adduser")
-    public String addUser(UserEntity user) {
+    public String proccesAddUser(UserEntity user) {
         userRepository.save(user);
         return "user/created";
     }
