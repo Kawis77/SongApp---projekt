@@ -8,17 +8,12 @@ import com.github.kawis77.workshop.endproject.service.UserService;
 import com.github.kawis77.workshop.endproject.web.model.SongModel;
 import com.github.kawis77.workshop.endproject.web.model.SongRequest;
 import com.github.kawis77.workshop.endproject.dao.entity.UserEntity;
-import com.github.kawis77.workshop.endproject.dao.repository.ChordsRepository;
-import com.github.kawis77.workshop.endproject.dao.repository.SongRepository;
-import com.github.kawis77.workshop.endproject.dao.repository.UserRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -39,13 +34,13 @@ public class SongController {
 
 
     @GetMapping("/findbychords")
-    public String prepareFindBySong(Model model) {
+    public String prepareFindByChords(Model model) {
         model.addAttribute("chords", chordsService.allChords());
         return "song/findall";
     }
 
     @PostMapping("/findbychords")
-    public String processEdit(Model model, SongRequest songRequest) {
+    public String proccesFindByChords(Model model, SongRequest songRequest) {
         LOGGER.info("processEdit(" + songRequest + ")");
         List<ChordsEntity> chords = chordsService.findAllById(songRequest.getChords());
         Set<SongEntity> songs = new HashSet<>();
@@ -83,14 +78,14 @@ public class SongController {
 
 
     @GetMapping("/newsong")
-    public String addSong(Model model) {
+    public String prepareAddSong(Model model) {
         model.addAttribute("addsong", new SongEntity());
         model.addAttribute("chords", chordsService.allChords());
         return "song/create-songs";
     }
 
     @PostMapping("/newsong")
-    public String addSong(SongModel songModel, @RequestParam(name = "username") String username) {
+    public String proccesAddSong(SongModel songModel, @RequestParam(name = "username") String username) {
         LOGGER.info("addSong(" + songModel + "," + username + ")");
         Optional<UserEntity> userOptional = userService.findByUserName(username);
         UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
